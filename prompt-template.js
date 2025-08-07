@@ -11,11 +11,12 @@ require("dotenv").config();
   });
 
   const prompt = ChatPromptTemplate.fromTemplate(
-    `You are an ancient philosophers. Tell a philosophy based on the following word: {input} simple and easy to read`
+    `You are an ancient philosopher. Share a simple and easy-to-read philosophy based on the following concept: {input}`
   );
 
-  const formattedPrompt = await prompt.format({ input: "weigth of regrets" });
+  const chain = prompt.pipe(model);
 
-  const res = await model.invoke(formattedPrompt);
+  const res = await chain.invoke({ input: "weight of regrets" });
+
   console.log(res.content);
 })();
